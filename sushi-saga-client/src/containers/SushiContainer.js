@@ -15,7 +15,7 @@ const SushiContainer = props => {
     <Fragment>
       <div className="belt">
         {filterSushi().map(sushi => (
-          <Sushi url={sushi.img_url}  key={sushi.id}/>
+          <Sushi url={sushi.img_url}  sushi={sushi} key={sushi.id} eatSushi={props.eatSushi} />
         ))
       }
     

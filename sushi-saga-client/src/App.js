@@ -12,21 +12,37 @@ class App extends Component {
     emptyPlates: []
   };
 
-
   getNextFour = () => {
     console.log("this works");
-    
-    this.setState(prevState => {
-      return {sushiIndex: prevState.sushiIndex + 4}
-   })
-  }
 
- 
+    this.setState(prevState => {
+      return { sushiIndex: prevState.sushiIndex + 4 };
+    });
+  };
+
+  // Callback to create a eaten attribute for the app state. If the id matches the ID passed in, it will add the attribute, if it's false it just returns the sushi
+  eatSushi = id => {
+    this.setState({
+      sushis: this.state.sushis.map(sushi => {
+        if (sushi.id === id) {
+          sushi.eaten = true;
+        }
+        return sushi;
+      })
+    },() => console.log(this.state.sushis)
+    );
+  };
 
   render() {
     return (
       <div className="app">
-        <SushiContainer sushis={this.state.sushis} sushiIndex={this.state.sushiIndex}  getNextFour={this.getNextFour} emptyPlates={this.state.emptyPlates} />
+        <SushiContainer
+          sushis={this.state.sushis}
+          sushiIndex={this.state.sushiIndex}
+          getNextFour={this.getNextFour}
+          emptyPlates={this.state.emptyPlates}
+          eatSushi={this.eatSushi}
+        />
         <Table emptyPlates={this.state.emptyPlates} />
       </div>
     );
@@ -38,7 +54,7 @@ class App extends Component {
       .then(data => {
         this.setState(
           {
-            sushis: data,
+            sushis: data
           },
 
           () => {
