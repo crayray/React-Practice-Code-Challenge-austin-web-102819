@@ -44,9 +44,9 @@ class App extends Component {
   render() {
     let sushiDisplay;
     let tableDisplay;
-    let noMoney= this.state.wallet
     if(this.state.wallet < 5){
-      sushiDisplay= <h1>You've had enough!</h1>;
+      <div className="app">
+      </div>
       tableDisplay=  <Table
       emptyPlates={this.state.emptyPlates}
       wallet={0}
@@ -70,18 +70,6 @@ class App extends Component {
       <div className="app">
         {sushiDisplay}
         {tableDisplay}
-      {/* <SushiContainer
-          sushis={this.state.sushis}
-          sushiIndex={this.state.sushiIndex}
-          getNextFour={this.getNextFour}
-          emptyPlates={this.state.emptyPlates}
-          eatSushi={this.eatSushi}
-        /> */}
-  
-        {/* <Table
-          emptyPlates={this.state.emptyPlates}
-          wallet={this.state.wallet}
-        /> */}
       </div>
     );
   }
