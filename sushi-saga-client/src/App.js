@@ -25,6 +25,7 @@ class App extends Component {
   // Callback to create a eaten attribute for the app state. If the id matches the ID passed in, it will add the attribute, if it's false it just returns the sushi
   eatSushi = id => {
     const newMoney = this.state.wallet - id.price
+    //This is where we want to check the wallet to make sure we have enough money. If we don't, say you've had enough. 
 
     this.setState(
       {
