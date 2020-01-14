@@ -21,8 +21,11 @@ class App extends Component {
     });
   };
 
+ 
   // Callback to create a eaten attribute for the app state. If the id matches the ID passed in, it will add the attribute, if it's false it just returns the sushi
   eatSushi = id => {
+    const newMoney = this.state.wallet - id.price
+
     this.setState(
       {
         wallet: this.state.wallet - id.price,
@@ -39,19 +42,46 @@ class App extends Component {
   };
 
   render() {
+    let sushiDisplay;
+    let tableDisplay;
+    let noMoney= this.state.wallet
+    if(this.state.wallet < 5){
+      sushiDisplay= <h1>You've had enough!</h1>;
+      tableDisplay=  <Table
+      emptyPlates={this.state.emptyPlates}
+      wallet={0}
+    />
+      
+     } else {
+       sushiDisplay= <SushiContainer
+       sushis={this.state.sushis}
+       sushiIndex={this.state.sushiIndex}
+       getNextFour={this.getNextFour}
+       emptyPlates={this.state.emptyPlates}
+       eatSushi={this.eatSushi}
+     />;
+      tableDisplay =  <Table
+      emptyPlates={this.state.emptyPlates}
+      wallet={this.state.wallet}
+    />
+     }
+     
     return (
       <div className="app">
-        <SushiContainer
+        {sushiDisplay}
+        {tableDisplay}
+      {/* <SushiContainer
           sushis={this.state.sushis}
           sushiIndex={this.state.sushiIndex}
           getNextFour={this.getNextFour}
           emptyPlates={this.state.emptyPlates}
           eatSushi={this.eatSushi}
-        />
-        <Table
+        /> */}
+  
+        {/* <Table
           emptyPlates={this.state.emptyPlates}
           wallet={this.state.wallet}
-        />
+        /> */}
       </div>
     );
   }
