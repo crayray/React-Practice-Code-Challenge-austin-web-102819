@@ -10,7 +10,8 @@ const Sushi = (props) => {
   return (
     <div className="sushi">
     {/* Here we're passing in the id of the specific sushi back to the eatSushi function in APP which CAN change the state.  */}
-      <div className="plate" onClick={() => props.eatSushi(props.sushi.id)}>
+      <div className="plate" onClick={() => props.eatSushi(props.sushi)}>
+      {console.log(props.sushi)}
         { 
           /* Tell me if this sushi has been eaten! */ 
           props.sushi.eaten ?
@@ -20,7 +21,7 @@ const Sushi = (props) => {
         }
       </div>
       <h4 className="sushi-details">
-        {/* Give me a name! */} - ${/* Give me a price! */}
+        {props.sushi.name} - ${props.sushi.price}
       </h4>
     </div>
   )

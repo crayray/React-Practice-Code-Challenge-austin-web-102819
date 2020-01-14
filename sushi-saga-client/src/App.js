@@ -9,7 +9,8 @@ class App extends Component {
   state = {
     sushis: [],
     sushiIndex: 0,
-    emptyPlates: []
+    emptyPlates: [],
+    wallet: 100
   };
 
   getNextFour = () => {
@@ -22,14 +23,18 @@ class App extends Component {
 
   // Callback to create a eaten attribute for the app state. If the id matches the ID passed in, it will add the attribute, if it's false it just returns the sushi
   eatSushi = id => {
-    this.setState({
-      sushis: this.state.sushis.map(sushi => {
-        if (sushi.id === id) {
-          sushi.eaten = true;
-        }
-        return sushi;
-      })
-    },() => console.log(this.state.sushis)
+    this.setState(
+      {
+        wallet: this.state.wallet - id.price,
+        sushis: this.state.sushis.map(sushi => {
+          if (sushi.id === id.id) {
+            sushi.eaten = true;
+          }
+          return sushi;
+        }),
+        emptyPlates: this.state.sushis.filter(sushi => sushi.eaten)
+      },
+      () => console.log(this.state)
     );
   };
 
@@ -43,7 +48,10 @@ class App extends Component {
           emptyPlates={this.state.emptyPlates}
           eatSushi={this.eatSushi}
         />
-        <Table emptyPlates={this.state.emptyPlates} />
+        <Table
+          emptyPlates={this.state.emptyPlates}
+          wallet={this.state.wallet}
+        />
       </div>
     );
   }

@@ -10,12 +10,13 @@ const Table = (props) => {
 
   return (
     <Fragment>
+    
       <h1 className="remaining">
-        You have: ${ /* Give me how much money I have left */ } remaining!
+        You have: ${ props.wallet } remaining!
       </h1>
       <div className="table">
         <div className="stack">
-         
+     
             {renderPlates(props.emptyPlates)}
           
         </div>
